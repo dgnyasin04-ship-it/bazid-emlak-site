@@ -1,0 +1,1 @@
+# bazid-emlak-site
