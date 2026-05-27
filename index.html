@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bazid Emlak - Herşey Güvenle Başlar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <!-- Logonuz buraya gelecek -->
+            <h1>BAZİD EMLAK</h1>
+            <p>"Herşey Güvenle Başlar"</p>
+        </div>
+        <nav>
+            <a href="#" style="text-decoration:none; color:#333;">İletişim: 0555 555 55 55</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h2>Hayalinizdeki Ev</h2>
+            <p>Güvenilir Emlak Çözümleri</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 style="text-align:center; margin-bottom:30px;">Son İlanlar</h2>
+        <div class="grid" id="ilan-listesi">
+            <!-- İlanlar JavaScript ile buraya gelecek -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Bazid Emlak - Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <script>
+        // İlanları JSON dosyasından çekip sayfaya yazdırıyoruz
+        fetch('ilanlar.json')
+            .then(response => response.json())
+            .then(data => {
+                const liste = document.getElementById('ilan-listesi');
+                data.forEach(ilan => {
+                    const kart = `
+                        <div class="card">
+                            <img src="${ilan.resim}" alt="${ilan.baslik}">
+                            <div class="content">
+                                <span class="price">${ilan.fiyat.toLocaleString('tr-TR')} ₺</span>
+                                <h3 class="title">${ilan.baslik}</h3>
+                                <div class="location">📍 ${ilan.ilce} / ${ilan.sehir}</div>
+                                <div class="features">
+                                    <span>🛏️ ${ilan.oda}</span>
+                                    <span>🚿 ${ilan.banyo} Banyo</span>
+                                    <span> ${ilan.metrekare} m²</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    liste.innerHTML += kart;
+                });
+            })
+            .catch(error => console.error('Hata:', error));
+    </script>
+
+</body>
+</html>
